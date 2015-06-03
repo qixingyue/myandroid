@@ -18,8 +18,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="115dp"
-                android:layout_marginTop="125dp"
+                android:layout_marginLeft="113dp"
+                android:layout_marginTop="128dp"
                 android:text="30"
                 android:textColor="#CCCCCC"
                 android:textSize="120sp" />
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="140dp"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="130dp"
                 android:orientation="vertical" >
 
                 <TextView
@@ -52,6 +52,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
                     android:text="最高:"
                     android:textSize="20sp" />
 
@@ -64,6 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
                     android:text="趋势:"
                     android:textSize="20sp" />
             </LinearLayout>

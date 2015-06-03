@@ -2,6 +2,7 @@ package com.weibo.libs;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +12,9 @@ import android.graphics.Paint.Style;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
+//import com.yq.async.RemoteModel;
 
 public class RadarView extends FrameLayout {
 
@@ -65,15 +68,15 @@ public class RadarView extends FrameLayout {
 
 		mPaintText = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DEV_KERN_TEXT_FLAG);
 		mPaintText.setTextSize(fontSize);
-
-		Shader mShader = new SweepGradient(viewSize / 2, viewSize / 2,
-				new int[] { Color.WHITE, Color.parseColor("#FFE4E1") },
-				new float[] { 0.5f, 1 });
-		mPaintSector.setShader(mShader);
-
-		mShader = new SweepGradient(viewSize / 2, viewSize / 2, new int[] {
-				Color.WHITE, Color.parseColor("#EE3B3B") }, null);
-		mPaintSector1.setShader(mShader);
+		
+		 Shader mShader = new SweepGradient(viewSize / 2, viewSize / 2, new
+		 int[] { Color.WHITE, Color.parseColor("#FFE4E1") },new float[] {
+		 0.5f, 1 }); 
+		 mPaintSector.setShader(mShader);
+		 
+		 mShader = new SweepGradient(viewSize / 2, viewSize / 2, new int[]
+		 {Color.WHITE, Color.parseColor("#EE3B3B") }, null);
+		 mPaintSector1.setShader(mShader);
 	}
 
 	public void setradarSize(int width, int height) {
@@ -85,11 +88,14 @@ public class RadarView extends FrameLayout {
 		this.radio = Math.min(this.radioWidth, this.radioHeight);
 		this.fontSize = Math.round(FONT_SIZE * radio);
 
-		setMeasuredDimension(viewSize, viewSize);
+		// setMeasuredDimension(viewSize, viewSize);
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		Log.d("RADARVIEW", "width: " + widthMeasureSpec + " height: "
+				+ heightMeasureSpec);
+
 		setMeasuredDimension(viewSize, viewSize);
 	}
 
@@ -163,6 +169,8 @@ public class RadarView extends FrameLayout {
 				viewSize / 2, viewSize / 2 + (radarSize * 9 / 20), mPaintLine);
 		canvas.drawLine(viewSize / 2 - (radarSize * 9 / 20), viewSize / 2,
 				viewSize / 2 + (radarSize * 9 / 20), viewSize / 2, mPaintLine);
+
+
 
 		if (matrix == null) {
 			matrix = new Matrix();

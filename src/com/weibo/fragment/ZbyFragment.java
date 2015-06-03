@@ -12,6 +12,7 @@ import com.weibo.libs.RadarView;
 import com.weibo.sinazby.R;
 
 public class ZbyFragment extends Fragment {
+	
 	private RadarView radar;
 	
 	@Override

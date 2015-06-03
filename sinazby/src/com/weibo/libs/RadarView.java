@@ -1,8 +1,5 @@
 package com.weibo.libs;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,24 +8,25 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-public class RadarView extends FrameLayout {
+public class RadarView extends FrameLayout implements Runnable {
 
 	private int mViewSize;
 	private Paint mPaintLine;
 	private Paint mPaintSector;
 	private Paint mPaintSector1;
+	private final Handler handler = new Handler(Looper.getMainLooper());
 
 	public boolean isstart = false;
-	private Timer mTimer;
 	private int start = 0;
 
 	public RadarView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setBackgroundColor(Color.TRANSPARENT);
-		onResume();
 	}
 
 	public RadarView(Context context) {
@@ -75,19 +73,18 @@ public class RadarView extends FrameLayout {
 		setMeasuredDimension(parentWidth, parentWidth);
 	}
 
-	public void onResume() {
-		if (mTimer != null) {
-			mTimer.cancel();
-		}
-		mTimer = new Timer(true);
-		mTimer.schedule(new UpdateTask(this), 0, 15);
-	}
 
-	public void onPause() {
-		if (mTimer != null) {
-			mTimer.cancel();
-		}
-	}
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        handler.post(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        handler.removeCallbacksAndMessages(null);
+    }
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -119,24 +116,13 @@ public class RadarView extends FrameLayout {
 
 	private Matrix matrix;
 
-	private final class UpdateTask extends TimerTask {
 
-		private RadarView mView;
-
-		public UpdateTask(RadarView view) {
-			mView = view;
-		}
-
-		@Override
-		public void run() {
-			mView.post(new Runnable() {
-				public void run() {
-					start = start + 1;
-					matrix = new Matrix();
-					matrix.postRotate(start, mViewSize / 2, mViewSize / 2);
-					mView.invalidate();
-				}
-			});
-		}
+	@Override
+	public void run() {
+		start = start + 1;
+		matrix = new Matrix();
+		matrix.postRotate(start, mViewSize / 2, mViewSize / 2);
+		invalidate();
+		handler.postDelayed(this, 1000 / 60);
 	}
 }

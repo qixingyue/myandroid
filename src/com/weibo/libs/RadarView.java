@@ -14,12 +14,11 @@ import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.FrameLayout;
-//import com.yq.async.RemoteModel;
 
 public class RadarView extends FrameLayout {
 
-	private int radarSize = 400;
-	private int viewSize = 400;
+	private int radarSize;
+	private int viewSize;
 	private Paint mPaintLine;
 	private Paint mPaintSector;
 	private Paint mPaintSector1;
@@ -68,35 +67,34 @@ public class RadarView extends FrameLayout {
 
 		mPaintText = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DEV_KERN_TEXT_FLAG);
 		mPaintText.setTextSize(fontSize);
-		
-		 Shader mShader = new SweepGradient(viewSize / 2, viewSize / 2, new
-		 int[] { Color.WHITE, Color.parseColor("#FFE4E1") },new float[] {
-		 0.5f, 1 }); 
-		 mPaintSector.setShader(mShader);
-		 
-		 mShader = new SweepGradient(viewSize / 2, viewSize / 2, new int[]
-		 {Color.WHITE, Color.parseColor("#EE3B3B") }, null);
-		 mPaintSector1.setShader(mShader);
+
+		Shader mShader = new SweepGradient(viewSize / 2, viewSize / 2,
+				new int[] { Color.WHITE, Color.parseColor("#FFE4E1") },
+				new float[] { 0.5f, 1 });
+		mPaintSector.setShader(mShader);
+
+		mShader = new SweepGradient(viewSize / 2, viewSize / 2, new int[] {
+				Color.WHITE, Color.parseColor("#EE3B3B") }, null);
+		mPaintSector1.setShader(mShader);
+
 	}
 
-	public void setradarSize(int width, int height) {
-		this.viewSize = width - width / 8;
-		this.radarSize = width - width / 8;
 
-		this.radioWidth = (float) width / WIDTH;
-		this.radioHeight = (float) height / HEIGHT;
+	// @Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+		int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
+
+		
+		this.viewSize = parentWidth ;
+		this.radarSize = parentWidth;
+
+		this.radioWidth = (float) parentWidth / WIDTH;
+		this.radioHeight = (float) parentWidth / HEIGHT;
 		this.radio = Math.min(this.radioWidth, this.radioHeight);
 		this.fontSize = Math.round(FONT_SIZE * radio);
-
-		// setMeasuredDimension(viewSize, viewSize);
-	}
-
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		Log.d("RADARVIEW", "width: " + widthMeasureSpec + " height: "
-				+ heightMeasureSpec);
-
-		setMeasuredDimension(viewSize, viewSize);
+		setMeasuredDimension(parentWidth, parentWidth);
 	}
 
 	public void onResume() {
@@ -118,6 +116,8 @@ public class RadarView extends FrameLayout {
 		if (mPaintLine == null) {
 			initPaint();
 		}
+		
+		Log.d("RADARVIEW", "width view: " + viewSize);
 
 		float baseLeft = viewSize / 2 - 80 * radioWidth;
 		float baseTop = viewSize / 2 - 80 * radioHeight;
@@ -161,7 +161,6 @@ public class RadarView extends FrameLayout {
 				* radioHeight, mPaintText);
 
 		canvas.drawCircle(viewSize / 2, viewSize / 2, radarSize / 4, mPaintLine);
-		// canvas.drawCircle(radarSize / 2, radarSize / 2, 110, mPaintLine);
 		canvas.drawCircle(viewSize / 2, viewSize / 2, radarSize * 9 / 20,
 				mPaintLine);
 
@@ -169,8 +168,6 @@ public class RadarView extends FrameLayout {
 				viewSize / 2, viewSize / 2 + (radarSize * 9 / 20), mPaintLine);
 		canvas.drawLine(viewSize / 2 - (radarSize * 9 / 20), viewSize / 2,
 				viewSize / 2 + (radarSize * 9 / 20), viewSize / 2, mPaintLine);
-
-
 
 		if (matrix == null) {
 			matrix = new Matrix();

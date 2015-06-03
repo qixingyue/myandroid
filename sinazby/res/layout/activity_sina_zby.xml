@@ -1,7 +1,26 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sat="http://schemas.android.com/apk/res/com.weibo.sinazby"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragmentContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+
+    
+    <android.view.ext.SatelliteMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="8dp"
+        sat:closeOnClick="true"
+        sat:expandDuration="500"
+        sat:mainImage="@drawable/ic_launcher"
+        sat:satelliteDistance="80dp"
+        sat:totalSpacingDegree="120" />
+    
 </FrameLayout>

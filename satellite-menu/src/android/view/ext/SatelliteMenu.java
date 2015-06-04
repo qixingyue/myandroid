@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,6 +33,9 @@ public class SatelliteMenu extends FrameLayout {
 
 	private static final int DEFAULT_SATELLITE_DISTANCE = 200;
 	private static final float DEFAULT_TOTAL_SPACING_DEGREES = 90f;
+	private static final float DEFAULT_START_DEGREE = 0f;
+	private static final float DEFAULT_ITEM_DEGREE = 30f;
+	
 	private static final boolean DEFAULT_CLOSE_ON_CLICK = true;
 	private static final int DEFAULT_EXPAND_DURATION = 400;
 
@@ -55,6 +59,8 @@ public class SatelliteMenu extends FrameLayout {
 	private int measureDiff = 0;
 	//States of these variables are saved - Also configured from XML 
 	private float totalSpacingDegree = DEFAULT_TOTAL_SPACING_DEGREES;
+	private float startDegree = DEFAULT_START_DEGREE;
+	private float itemDegree = DEFAULT_ITEM_DEGREE;
 	private int satelliteDistance = DEFAULT_SATELLITE_DISTANCE;	
 	private int expandDuration = DEFAULT_EXPAND_DURATION;
 	private boolean closeItemsOnClick = DEFAULT_CLOSE_ON_CLICK;
@@ -82,6 +88,12 @@ public class SatelliteMenu extends FrameLayout {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SatelliteMenu, defStyle, 0);					
 			satelliteDistance = typedArray.getDimensionPixelSize(R.styleable.SatelliteMenu_satelliteDistance, DEFAULT_SATELLITE_DISTANCE);
 			totalSpacingDegree = typedArray.getFloat(R.styleable.SatelliteMenu_totalSpacingDegree, DEFAULT_TOTAL_SPACING_DEGREES);
+			
+			startDegree = typedArray.getFloat(R.styleable.SatelliteMenu_startDegree, DEFAULT_START_DEGREE);
+			itemDegree = typedArray.getFloat(R.styleable.SatelliteMenu_itemDegree, DEFAULT_ITEM_DEGREE);
+			
+			gapDegreesProvider.setItemDegree(startDegree, itemDegree);
+			
 			closeItemsOnClick = typedArray.getBoolean(R.styleable.SatelliteMenu_closeOnClick, DEFAULT_CLOSE_ON_CLICK);
 			expandDuration = typedArray.getInt(R.styleable.SatelliteMenu_expandDuration, DEFAULT_EXPAND_DURATION);
 			//float satelliteDistance = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 170, getResources().getDisplayMetrics());

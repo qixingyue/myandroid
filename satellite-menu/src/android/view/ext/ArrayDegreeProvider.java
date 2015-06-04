@@ -20,4 +20,10 @@ public class ArrayDegreeProvider implements IDegreeProvider {
         }
 		return degrees; 
 	}
+
+	@Override
+	public void setItemDegree(float startDegree, float itemDegree) {
+		// TODO Auto-generated method stub
+		
+	}
 }

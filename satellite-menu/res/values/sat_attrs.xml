@@ -4,6 +4,8 @@
 		<attr name="expandDuration" format="integer" />
 		<attr name="closeOnClick" format="boolean" />
 		<attr name="totalSpacingDegree" format="float" />
+		<attr name="startDegree" format="float" />
+		<attr name="itemDegree" format="float" />
 		<attr name="satelliteDistance" format="dimension" />
 		<attr name="mainImage" format="reference" />		
 	</declare-styleable>

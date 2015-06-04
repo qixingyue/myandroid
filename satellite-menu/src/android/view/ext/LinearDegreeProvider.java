@@ -29,4 +29,10 @@ public class LinearDegreeProvider implements IDegreeProvider {
         
         return result;
 	}
+
+	@Override
+	public void setItemDegree(float startDegree, float itemDegree) {
+		// TODO Auto-generated method stub
+		
+	}
 }

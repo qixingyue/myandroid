@@ -19,13 +19,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="30"
+                android:text="3"
                 android:textColor="#CCCCCC"
                 android:textSize="120sp" />
 
             <com.weibo.libs.RadarView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,36 +36,32 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_show_buy"
+                    style="@style/GreenText"
                     android:text="买入:3.30"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="卖出:3.80"
-                    android:textSize="20sp" />
+                    android:id="@+id/tv_show_sale"
+                    style="@style/RedText"
+                    android:text="卖出:3.80" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_show_highest"
+                    style="@style/RedText"
                     android:layout_marginTop="7dp"
-                    android:text="最高:3.54"
-                    android:textSize="20sp" />
+                    android:text="最高:3.54" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="最低:3.21"
-                    android:textSize="20sp" />
+                    android:id="@+id/tv_show_lowest"
+                    style="@style/GreenText"
+                    android:text="最低:3.21" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_show_direction"
+                    style="@style/BaseText"
                     android:layout_marginTop="7dp"
-                    android:text="趋势:上涨"
-                    android:textSize="20sp" />
+                    android:text="趋势:上涨" />
             </LinearLayout>
         </FrameLayout>
 
@@ -82,18 +80,14 @@
 
             <TextView
                 android:id="@+id/tv_buy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="yyy"
-                android:textSize="20sp" />
+                style="@style/RedText"
+                android:text="yyy" />
 
             <TextView
                 android:id="@+id/tv_sale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/GreenText"
                 android:layout_marginTop="5dp"
-                android:text="xxxx"
-                android:textSize="20sp" />
+                android:text="xxxx" />
         </LinearLayout>
     </LinearLayout>
 

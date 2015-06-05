@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weibo.fragment.ZbyFragment;
+import com.weibo.sinazby.service.Starter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ public class SinaZbyActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Starter.startMainGrabService(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);   
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sina_zby);

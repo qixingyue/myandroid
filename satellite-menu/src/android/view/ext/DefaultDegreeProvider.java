@@ -33,7 +33,6 @@ public class DefaultDegreeProvider implements IDegreeProvider {
         
         result = new float[count];
         float delta ;
-        Log.i("TAG", itemDegree + "");
         if(itemDegree == 0) {
         	delta= totalDegrees / tmpCount;
         } else {

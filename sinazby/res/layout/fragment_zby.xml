@@ -23,7 +23,7 @@
                 android:textColor="#CCCCCC"
                 android:textSize="120sp" />
 
-            <com.weibo.libs.RadarView
+            <com.weibo.libs.NBView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"

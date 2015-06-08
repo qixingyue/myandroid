@@ -13,7 +13,11 @@ public class ZbyGrabHandler extends BroadCastHandler {
 		setContext(context);
 		BroadCastInfo broadCastInfo = new BroadCastInfo();
 		broadCastInfo.broadCastName = ZBYPriceLoaded;
-		broadCastInfo.broadCastContent = data;
+		if(data.isEmpty()){
+			broadCastInfo.broadCastContent = "{\"i\":\"0\",\"o\":\"0\",\"h\":\"0\",\"l\":\"0\",\"d\":\"U\"}";
+		} else {
+			broadCastInfo.broadCastContent = data;
+		}
 		sendBroadCast(broadCastInfo );
 	}
 

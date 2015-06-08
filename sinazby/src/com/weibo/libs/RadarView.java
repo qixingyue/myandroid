@@ -119,7 +119,7 @@ public class RadarView extends FrameLayout implements Runnable {
 
 	@Override
 	public void run() {
-		start = start + 3;
+		start = start + 1;
 		matrix = new Matrix();
 		matrix.postRotate(start, mViewSize / 2, mViewSize / 2);
 		invalidate();

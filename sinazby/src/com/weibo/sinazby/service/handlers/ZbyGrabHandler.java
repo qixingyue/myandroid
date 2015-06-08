@@ -6,10 +6,15 @@ import android.widget.Toast;
 
 public class ZbyGrabHandler extends BroadCastHandler {
 
+	public static String ZBYPriceLoaded = "com.weibo.zbyprice.loaded";
+	
 	@Override
 	public void doWithData(String data, Context context) {
 		setContext(context);
-		sendBroadCast(new BroadCastInfo());
+		BroadCastInfo broadCastInfo = new BroadCastInfo();
+		broadCastInfo.broadCastName = ZBYPriceLoaded;
+		broadCastInfo.broadCastContent = data;
+		sendBroadCast(broadCastInfo );
 	}
 
 }

@@ -1,5 +1,10 @@
 package com.weibo.sinazby.service;
 
+import org.apache.http.Header;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+
 import android.content.Context;
 
 public class GrabInfo {
@@ -9,6 +14,7 @@ public class GrabInfo {
 	private int grabTimeout;
 	private String grabName;
 	private Context grabContext;
+	private AsyncHttpClient client;
 
 	public GrabInfo(String grabName, String grabUrl, GrabHandler grabHandler,
 			int grabTimeout) {
@@ -16,6 +22,7 @@ public class GrabInfo {
 		this.grabHandler = grabHandler;
 		this.grabTimeout = grabTimeout;
 		this.grabName = grabName;
+		client = new AsyncHttpClient();
 	}
 
 	public String getGrabUrl() {
@@ -50,9 +57,22 @@ public class GrabInfo {
 		this.grabName = grabName;
 	}
 
-	public void doGrab(Context grabContext) throws GrabException{
+	public void doGrab(final Context grabContext) throws GrabException{
 		this.grabContext = grabContext;
-		this.grabHandler.doWithData("", grabContext);
+		client.get(grabUrl, new TextHttpResponseHandler(){
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, String arg2,
+					Throwable arg3) {
+				grabHandler.doWithData("", grabContext);
+			}
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, String content) {
+				grabHandler.doWithData(content, grabContext);
+			}
+			
+		});
 	}
 	
 	public interface GrabHandler {
@@ -60,6 +80,10 @@ public class GrabInfo {
 	}
 	
 	public class GrabException extends Exception{
+
+		public GrabException(String message) {
+			super(message);
+		}
 		
 	}
 }

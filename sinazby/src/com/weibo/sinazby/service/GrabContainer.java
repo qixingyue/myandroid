@@ -8,7 +8,7 @@ public class GrabContainer {
 	 * @todo 自定义分时间抓取
 	 */
 	private static GrabInfo[] grabList = {
-		new GrabInfo("zby", "", new ZbyGrabHandler(), 0),
+		new GrabInfo("zby", "http://lovechain.sinaapp.com/baiyin.php", new ZbyGrabHandler(), 0),
 	};
 	
 	public static GrabInfo[] getGrabList(){

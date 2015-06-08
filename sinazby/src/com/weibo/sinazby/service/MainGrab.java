@@ -12,20 +12,6 @@ import android.os.SystemClock;
 public class MainGrab extends Service {
 
 	private GrabInfo[] grabList = GrabContainer.getGrabList();
-	private Runnable grabRunable = new Runnable() {
-		
-		@Override
-		//todo：异常捕捉
-		public void run() {
-			for (GrabInfo grabInfo : grabList) {
-				try {
-					grabInfo.doGrab(MainGrab.this);
-				} catch (GrabException e) {
-//					e.printStackTrace();
-				}
-			}
-		}
-	};
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -35,7 +21,13 @@ public class MainGrab extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if( SinaZbyPreferWR.Preference(this).getServiceStatus()) {
-			new Thread(grabRunable).start();
+			for (GrabInfo grabInfo : grabList) {
+				try {
+					grabInfo.doGrab(MainGrab.this);
+				} catch (GrabException e) {
+//					e.printStackTrace();
+				}
+			}
 		}
 		wakeUpSelf();
 		return super.onStartCommand(intent, flags, startId);

@@ -64,6 +64,7 @@ public class SatelliteMenu extends FrameLayout {
 	private int satelliteDistance = DEFAULT_SATELLITE_DISTANCE;	
 	private int expandDuration = DEFAULT_EXPAND_DURATION;
 	private boolean closeItemsOnClick = DEFAULT_CLOSE_ON_CLICK;
+	private int imageId;
 
 	public SatelliteMenu(Context context) {
 		super(context);
@@ -96,10 +97,12 @@ public class SatelliteMenu extends FrameLayout {
 			
 			closeItemsOnClick = typedArray.getBoolean(R.styleable.SatelliteMenu_closeOnClick, DEFAULT_CLOSE_ON_CLICK);
 			expandDuration = typedArray.getInt(R.styleable.SatelliteMenu_expandDuration, DEFAULT_EXPAND_DURATION);
+			imageId = typedArray.getResourceId(R.styleable.SatelliteMenu_mainImage, R.id.sat_main);
 			//float satelliteDistance = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 170, getResources().getDisplayMetrics());
 			typedArray.recycle();
 		}
 		
+		imgMain.setImageResource(imageId);
 		
 		mainRotateLeft = SatelliteAnimationCreator.createMainButtonAnimation(context);
 		mainRotateRight = SatelliteAnimationCreator.createMainButtonInverseAnimation(context);
@@ -128,7 +131,7 @@ public class SatelliteMenu extends FrameLayout {
 				SatelliteMenu.this.onClick();
 			}
 		});
-
+		
 		internalItemClickListener = new InternalSatelliteOnClickListener(this);
 	}
 

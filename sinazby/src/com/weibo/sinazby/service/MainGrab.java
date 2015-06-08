@@ -19,7 +19,7 @@ public class MainGrab extends Service {
 		public void run() {
 			for (GrabInfo grabInfo : grabList) {
 				try {
-					grabInfo.doGrab();
+					grabInfo.doGrab(MainGrab.this);
 				} catch (GrabException e) {
 //					e.printStackTrace();
 				}

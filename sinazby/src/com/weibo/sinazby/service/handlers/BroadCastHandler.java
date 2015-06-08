@@ -15,15 +15,14 @@ public abstract class BroadCastHandler implements GrabHandler {
 	
 	protected void sendBroadCast(BroadCastInfo broadCastInfo) {
 		if(null != context) {
-			Intent broadCastIntent = new Intent();
-			broadCastIntent.putExtra("broadCastName", broadCastInfo.broadCastName);
+			Intent broadCastIntent = new Intent(broadCastInfo.broadCastName);
 			broadCastIntent.putExtra("broadCastContent", broadCastInfo.broadCastContent);
 			context.sendBroadcast(broadCastIntent);
 		}
 	}
 	
 	public class BroadCastInfo {
-		public String broadCastName;
-		public String broadCastContent;
+		public String broadCastName = "com.weibo.defaultBroadCast";
+		public String broadCastContent = "com.weibo.defaultBroadCast.defaultData";
 	}
 }

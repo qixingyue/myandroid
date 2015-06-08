@@ -8,6 +8,7 @@ public class GrabInfo {
 	private GrabHandler grabHandler;
 	private int grabTimeout;
 	private String grabName;
+	private Context grabContext;
 
 	public GrabInfo(String grabName, String grabUrl, GrabHandler grabHandler,
 			int grabTimeout) {
@@ -49,8 +50,9 @@ public class GrabInfo {
 		this.grabName = grabName;
 	}
 
-	public void doGrab() throws GrabException{
-		
+	public void doGrab(Context grabContext) throws GrabException{
+		this.grabContext = grabContext;
+		this.grabHandler.doWithData("", grabContext);
 	}
 	
 	public interface GrabHandler {

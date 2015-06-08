@@ -25,6 +25,8 @@
             android:name="com.weibo.sinazby.service.MainGrab"
             android:process=":grab" >
         </service>
+        
+        <receiver android:name="com.weibo.sinazby.service.WakeUpReceiver" />
     </application>
 
 </manifest>

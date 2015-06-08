@@ -49,7 +49,15 @@ public class GrabInfo {
 		this.grabName = grabName;
 	}
 
+	public void doGrab() throws GrabException{
+		
+	}
+	
 	public interface GrabHandler {
 		public void doWithData(String data,Context context);
+	}
+	
+	public class GrabException extends Exception{
+		
 	}
 }

@@ -1,17 +1,31 @@
 package com.weibo.sinazby.service;
-import com.weibo.libs.SinaZbyPreferWR;
 
+import com.weibo.libs.SinaZbyPreferWR;
+import com.weibo.sinazby.service.GrabInfo.GrabException;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.util.Log;
 
 public class MainGrab extends Service {
 
 	private GrabInfo[] grabList = GrabContainer.getGrabList();
+	private Runnable grabRunable = new Runnable() {
+		
+		@Override
+		//todo：异常捕捉
+		public void run() {
+			for (GrabInfo grabInfo : grabList) {
+				try {
+					grabInfo.doGrab();
+				} catch (GrabException e) {
+//					e.printStackTrace();
+				}
+			}
+		}
+	};
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -19,13 +33,10 @@ public class MainGrab extends Service {
 	}
 	
 	@Override
-	public void onCreate() {
-		super.onCreate();
-	}
-	
-	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.i("TAG", "service wakeup .... ");
+		if( SinaZbyPreferWR.Preference(this).getServiceStatus()) {
+			new Thread(grabRunable).start();
+		}
 		wakeUpSelf();
 		return super.onStartCommand(intent, flags, startId);
 	}

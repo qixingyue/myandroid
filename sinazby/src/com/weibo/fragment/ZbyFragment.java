@@ -35,10 +35,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String data = intent.getStringExtra("broadCastContent");
-			Gson gson = new Gson();
-			showModel = gson.fromJson(data, new TypeToken<ZbyModel>() {
-			}.getType());
-			showModel.setJsonString(data);
+			showModel = ZbyModel.parseFromJsonString(data);
 			updateUI();
 		}
 	};

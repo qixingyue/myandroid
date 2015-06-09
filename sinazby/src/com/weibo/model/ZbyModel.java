@@ -1,6 +1,9 @@
 package com.weibo.model;
 
 import android.content.Context;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.weibo.libs.SinaZbyPreferWR;
 
 public class ZbyModel{
@@ -57,6 +60,14 @@ public class ZbyModel{
 	
 	public String getJsonString() {
 		return jsonString;
+	}
+	
+	public static ZbyModel parseFromJsonString(String content){
+		Gson gson = new Gson();
+		ZbyModel showModel = gson.fromJson(content, new TypeToken<ZbyModel>() {
+		}.getType());
+		showModel.setJsonString(content);
+		return showModel;
 	}
 	
 	public boolean[] checkPrice(Context context){

@@ -37,7 +37,7 @@ public class SinaZbyPreferWR extends PreferWR {
 	}
 
 	public int getUpdate() {
-		return getIntPrefer(UPDATE,3);
+		return getIntPrefer(UPDATE,30);
 	}
 	
 	public boolean getServiceStatus(){

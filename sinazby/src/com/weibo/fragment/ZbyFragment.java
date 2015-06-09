@@ -9,15 +9,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.weibo.libs.SinaZbyPreferWR;
 import com.weibo.model.ZbyModel;
 import com.weibo.sinazby.R;
 import com.weibo.sinazby.service.handlers.ZbyGrabHandler;
@@ -29,7 +26,8 @@ public class ZbyFragment extends Fragment implements Runnable {
 	private int start = 30;
 	private ZbyModel showModel;
 	private IntentFilter fliter = new IntentFilter();
-	private TextView innerPrice, outPrice, maxPrice, minPrice, direction;
+	private TextView innerPrice, outPrice, maxPrice, minPrice, direction,preBuyTextview,preSaleTextview;
+	private String preBuy,preSale;
 
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
@@ -40,6 +38,12 @@ public class ZbyFragment extends Fragment implements Runnable {
 		}
 	};
 
+	public void onCreate(Bundle savedInstanceState) {
+		preBuy = SinaZbyPreferWR.Preference(getActivity()).getBuyPirce();
+		preSale = SinaZbyPreferWR.Preference(getActivity()).getSalePrice();
+		super.onCreate(savedInstanceState);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -51,7 +55,18 @@ public class ZbyFragment extends Fragment implements Runnable {
 		maxPrice = (TextView) view.findViewById(R.id.tv_show_highest);
 		minPrice = (TextView) view.findViewById(R.id.tv_show_lowest);
 		direction = (TextView) view.findViewById(R.id.tv_show_direction);
+		
+		preBuyTextview = (TextView) view.findViewById(R.id.tv_buy);
+		preSaleTextview = (TextView) view.findViewById(R.id.tv_sale);
+		
+		initUI();
+		
 		return view;
+	}
+
+	private void initUI() {
+		preBuyTextview.setText("你预约的买入价为：" + preBuy);
+		preSaleTextview.setText("你预约的卖出价：" + preSale);
 	}
 
 	public void setTimer(int currentTime) {
@@ -89,6 +104,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 		maxPrice.setText("最高：" + showModel.getTodayHigh());
 		minPrice.setText("最低：" + showModel.getTodayLow());
 		direction.setText("趋势：" + (showModel.getDirection().equals("U") ? "上涨" : "下降") );
+		
 	}
 
 }

@@ -7,7 +7,7 @@ import com.weibo.sinazby.service.GrabInfo.GrabHandler;
 
 public abstract class BroadCastHandler implements GrabHandler {
 
-	private Context context;
+	protected Context context;
 	
 	protected void setContext(Context context){
 		this.context = context;

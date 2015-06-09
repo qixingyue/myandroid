@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weibo.fragment.ZbyFragment;
+import com.weibo.fragment.ZbySettingFragment;
 import com.weibo.sinazby.service.Starter;
 
 import android.os.Bundle;
@@ -20,57 +21,68 @@ import android.view.ext.SatelliteMenu.SateliteClickedListener;
 
 public class SinaZbyActivity extends FragmentActivity {
 
+	private Fragment zbyFragment,settingFragment;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Starter.startMainGrabService(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);   
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sina_zby);
-
-		FragmentManager manager = getSupportFragmentManager();
-		Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
-
-		if (null == fragment) {
-			fragment = new ZbyFragment();
-			// fragment = createFragment();
-			manager.beginTransaction().add(R.id.fragmentContainer, fragment)
-					.commit();
-		}
-
+		showZbyFragment();
 		initMenu();
 
 	}
+	
+	private void showZbyFragment(){
+		if (null == zbyFragment) {
+			zbyFragment = new ZbyFragment();
+		} 
+		showFragment(zbyFragment);
+	}
+	
+	private void showSettingFragment(){
+		if (null == settingFragment) {
+			settingFragment = new ZbySettingFragment();
+		} 
+		showFragment(settingFragment);
+	}
+	
+	private void showFragment(Fragment showFragment){
+		FragmentManager manager = getSupportFragmentManager();
+		if(null == manager.findFragmentById(R.id.fragmentContainer) ) {
+			manager.beginTransaction().add(R.id.fragmentContainer, showFragment)
+			.commit();
+		} else {
+			manager.beginTransaction().replace(R.id.fragmentContainer, showFragment)
+			.commit();
+		}
+	}
+	
 
 	private void initMenu() {
 		SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.menu);
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-		items.add(new SatelliteMenuItem(4, R.drawable.ic_38));
-//		items.add(new SatelliteMenuItem(1, R.drawable.ic_2));
+		
+		items.add(new SatelliteMenuItem(1, R.drawable.ic_38));
+		items.add(new SatelliteMenuItem(2, R.drawable.ic_logo));
+		
 		menu.addItems(items);
 		menu.setOnItemClickedListener(new SateliteClickedListener() {
 
 			public void eventOccured(int id) {
-				Log.i("sat", "Clicked on " + id);
+				if(id == 1) {
+					showSettingFragment();
+				} else {
+					showZbyFragment();
+				}
 			}
 		});
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.sina_zby, menu);
-		return true;
+	
+	public void settingChanged(){
+		showZbyFragment();
 	}
+	
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 }

@@ -37,7 +37,7 @@ public class ZbyGrabHandler extends BroadCastHandler {
             }
 			
 		}
-		Log.i(Const.TAG, broadCastInfo.broadCastContent);
+		
 		sendBroadCast(broadCastInfo);
 	}
 

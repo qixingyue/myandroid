@@ -1,9 +1,11 @@
 package com.weibo.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.weibo.config.Const;
 import com.weibo.libs.SinaZbyPreferWR;
 
 public class ZbyModel{
@@ -99,6 +101,7 @@ public class ZbyModel{
 		if(finPrice >= soutPrice && (int)finPrice != 0){
 			result[1] = true;
 		}
+		
 		return result;
 	}
 }

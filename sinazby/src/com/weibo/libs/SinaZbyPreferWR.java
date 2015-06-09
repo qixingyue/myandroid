@@ -1,7 +1,10 @@
 package com.weibo.libs;
 
+import com.weibo.config.Const;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class SinaZbyPreferWR extends PreferWR {
 
@@ -19,6 +22,15 @@ public class SinaZbyPreferWR extends PreferWR {
 	private static SinaZbyPreferWR instance;
 	
 	public static SinaZbyPreferWR Preference(Context context){
+		
+			instance = new SinaZbyPreferWR(context, "SettingXML");
+			instance.autoCommit = true;
+		
+		return instance;
+	}
+	
+	
+	public static SinaZbyPreferWR SinglePreference(Context context){
 		
 		if(null == instance){
 			instance = new SinaZbyPreferWR(context, "SettingXML");

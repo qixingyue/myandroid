@@ -39,8 +39,10 @@ public class ZbyFragment extends Fragment implements Runnable {
 	};
 
 	public void onCreate(Bundle savedInstanceState) {
+		
 		preBuy = SinaZbyPreferWR.Preference(getActivity()).getBuyPirce();
 		preSale = SinaZbyPreferWR.Preference(getActivity()).getSalePrice();
+		
 		super.onCreate(savedInstanceState);
 	}
 	
@@ -104,7 +106,6 @@ public class ZbyFragment extends Fragment implements Runnable {
 		maxPrice.setText("最高：" + showModel.getTodayHigh());
 		minPrice.setText("最低：" + showModel.getTodayLow());
 		direction.setText("趋势：" + (showModel.getDirection().equals("U") ? "上涨" : "下降") );
-		
 	}
 
 }

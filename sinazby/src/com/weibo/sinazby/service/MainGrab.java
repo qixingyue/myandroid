@@ -1,13 +1,16 @@
 package com.weibo.sinazby.service;
 
+import com.weibo.config.Const;
 import com.weibo.libs.SinaZbyPreferWR;
 import com.weibo.sinazby.service.GrabInfo.GrabException;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
 
 public class MainGrab extends Service {
 
@@ -35,7 +38,7 @@ public class MainGrab extends Service {
 
 	private void wakeUpSelf(){
 		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		int timeOffset = SinaZbyPreferWR.Preference(this).getUpdate() * 1000;
+		int timeOffset = SinaZbyPreferWR.Preference(getApplicationContext()).getUpdate() * 1000;
 		long triggerAtTime = SystemClock.elapsedRealtime() + timeOffset;
 		Intent alarmIntent = new Intent(this, WakeUpReceiver.class);
 		PendingIntent pi = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);

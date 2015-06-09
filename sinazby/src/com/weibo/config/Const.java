@@ -2,6 +2,6 @@ package com.weibo.config;
 
 public class Const {
 
-	public static String TAG = "CUSTOMLOG";
+	public static String TAGO = "CUSTOMLOG";
 	
 }

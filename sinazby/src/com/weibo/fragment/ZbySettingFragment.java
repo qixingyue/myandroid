@@ -48,7 +48,7 @@ public class ZbySettingFragment extends Fragment implements OnClickListener {
 		
 		et_buyPrice.setText(SinaZbyPreferWR.Preference(getActivity()).getBuyPirce());
 		et_salePrice.setText(SinaZbyPreferWR.Preference(getActivity()).getSalePrice());
-		et_update.setText(SinaZbyPreferWR.Preference(getActivity()).getUpdate());
+		et_update.setText(SinaZbyPreferWR.Preference(getActivity()).getUpdate() + "");
 		cb_service.setChecked(SinaZbyPreferWR.Preference(getActivity()).getServiceStatus());
 		cb_msg.setChecked(SinaZbyPreferWR.Preference(getActivity()).getMsgStatus());
 		

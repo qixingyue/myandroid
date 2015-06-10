@@ -21,7 +21,7 @@ import android.view.ext.SatelliteMenu.SateliteClickedListener;
 
 public class SinaZbyActivity extends FragmentActivity {
 
-	private Fragment zbyFragment,settingFragment;
+	private Fragment mZbyFragment,mSettingFragment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +35,17 @@ public class SinaZbyActivity extends FragmentActivity {
 	}
 	
 	private void showZbyFragment(){
-		if (null == zbyFragment) {
-			zbyFragment = new ZbyFragment();
+		if (null == mZbyFragment) {
+			mZbyFragment = new ZbyFragment();
 		} 
-		showFragment(zbyFragment);
+		showFragment(mZbyFragment);
 	}
 	
 	private void showSettingFragment(){
-		if (null == settingFragment) {
-			settingFragment = new ZbySettingFragment();
+		if (null == mSettingFragment) {
+			mSettingFragment = new ZbySettingFragment();
 		} 
-		showFragment(settingFragment);
+		showFragment(mSettingFragment);
 	}
 	
 	private void showFragment(Fragment showFragment){

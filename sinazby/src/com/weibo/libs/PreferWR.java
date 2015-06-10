@@ -5,17 +5,17 @@ import android.content.SharedPreferences;
 
 public class PreferWR {
 
-	private SharedPreferences spfSetting;
-	private SharedPreferences.Editor localEditor;
-	protected boolean autoCommit = false;
+	private SharedPreferences mSpfSetting;
+	private SharedPreferences.Editor mLocalEditor;
+	protected boolean mAutoCommit = false;
 	
 	protected PreferWR(Context context, String preferName) {
-		spfSetting = context.getSharedPreferences(preferName, Context.MODE_WORLD_READABLE | Context.MODE_MULTI_PROCESS);
-		localEditor = spfSetting.edit();
+		mSpfSetting = context.getSharedPreferences(preferName, Context.MODE_WORLD_READABLE | Context.MODE_MULTI_PROCESS);
+		mLocalEditor = mSpfSetting.edit();
 	}
 	
 	public String getStringPrefer(String key,String defaultValue) {
-		return spfSetting.getString(key, defaultValue);
+		return mSpfSetting.getString(key, defaultValue);
 	}
 	
 	public String getStringPrefer(String key) {
@@ -23,7 +23,7 @@ public class PreferWR {
 	}
 	
 	public int getIntPrefer(String key,int defaultValue) {
-		return spfSetting.getInt(key, defaultValue);
+		return mSpfSetting.getInt(key, defaultValue);
 	}
 	
 	public int getIntPrefer(String key) {
@@ -31,7 +31,7 @@ public class PreferWR {
 	}
 	
 	public boolean getBooleanPrefer(String key,boolean defaultValue) {
-		return spfSetting.getBoolean(key, defaultValue);
+		return mSpfSetting.getBoolean(key, defaultValue);
 	}
 	
 	public boolean getBooleanPrefer(String key) {
@@ -39,23 +39,23 @@ public class PreferWR {
 	}
 
 	public void setStringPrefer(String key,String value){
-		localEditor.putString(key, value);
-		if(autoCommit) {
-			localEditor.commit();
+		mLocalEditor.putString(key, value);
+		if(mAutoCommit) {
+			mLocalEditor.commit();
 		}
 	}
 	
 	public void setIntPrefer(String key,int value){
-		localEditor.putInt(key, value);
-		if(autoCommit) {
-			localEditor.commit();
+		mLocalEditor.putInt(key, value);
+		if(mAutoCommit) {
+			mLocalEditor.commit();
 		}
 	}
 	
 	public void setBooleanPrefer(String key,boolean value){
-		localEditor.putBoolean(key, value);
-		if(autoCommit) {
-			localEditor.commit();
+		mLocalEditor.putBoolean(key, value);
+		if(mAutoCommit) {
+			mLocalEditor.commit();
 		}
 	}
 	

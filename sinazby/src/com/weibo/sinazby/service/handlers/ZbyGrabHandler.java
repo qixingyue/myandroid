@@ -43,20 +43,20 @@ public class ZbyGrabHandler extends BroadCastHandler {
 
 	
 	private void setNotification(String content, int flag, boolean buyOrSale) {
-		Intent intent = new Intent(context,SinaZbyActivity.class );
+		Intent intent = new Intent(mContext,SinaZbyActivity.class );
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		PendingIntent pi = PendingIntent.getActivity(context, 100, intent,
+		PendingIntent pi = PendingIntent.getActivity(mContext, 100, intent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 		
 		int tickerId =  buyOrSale ? R.string.service_ticker_buy :R.string.service_ticker_sale;
 
-		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		 NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+		NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+		 NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
 				.setContentText(content)
 				.setAutoCancel(true)
 				.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS)
 				.setSmallIcon(R.drawable.ic_logo).setContentIntent(pi)
-				.setTicker(context.getResources().getText(tickerId));
+				.setTicker(mContext.getResources().getText(tickerId));
 		manager.notify(flag, builder.build());
 	}
 	

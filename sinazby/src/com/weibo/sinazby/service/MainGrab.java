@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class MainGrab extends Service {
 
-	private GrabInfo[] grabList = GrabContainer.getGrabList();
+	private GrabInfo[] mGrabList = GrabContainer.getGrabList();
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -24,7 +24,7 @@ public class MainGrab extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if( SinaZbyPreferWR.Preference(this).getServiceStatus()) {
-			for (GrabInfo grabInfo : grabList) {
+			for (GrabInfo grabInfo : mGrabList) {
 				try {
 					grabInfo.doGrab(MainGrab.this);
 				} catch (GrabException e) {

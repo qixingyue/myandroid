@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class ZbySettingFragment extends Fragment implements OnClickListener {
 
-	private View fragmentView;
+	private View mFragmentView;
 	private EditText et_buyPrice,et_salePrice,et_update;
 	private CheckBox cb_service,cb_msg;
 	
@@ -27,10 +27,10 @@ public class ZbySettingFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		fragmentView = inflater.inflate(R.layout.fragment_setting, null);
+		mFragmentView = inflater.inflate(R.layout.fragment_setting, null);
 		initChildCon();
 		initChildEvent();
-		return fragmentView;
+		return mFragmentView;
 	}
 
 	private void initChildEvent() {
@@ -38,12 +38,20 @@ public class ZbySettingFragment extends Fragment implements OnClickListener {
 	}
 
 	private void initChildCon() {
-		et_buyPrice = (EditText) fragmentView.findViewById(R.id.et_buyprice);
-		et_salePrice = (EditText) fragmentView.findViewById(R.id.et_saleprice);
-		et_update = (EditText) fragmentView.findViewById(R.id.et_update);
-		btn_save = (Button) fragmentView.findViewById(R.id.btn_save);
-		cb_service = (CheckBox) fragmentView.findViewById(R.id.cb_start_service);
-		cb_msg = (CheckBox) fragmentView.findViewById(R.id.cb_receive_msg);
+		
+		et_buyPrice = (EditText) mFragmentView.findViewById(R.id.et_buyprice);
+		et_salePrice = (EditText) mFragmentView.findViewById(R.id.et_saleprice);
+		et_update = (EditText) mFragmentView.findViewById(R.id.et_update);
+		btn_save = (Button) mFragmentView.findViewById(R.id.btn_save);
+		cb_service = (CheckBox) mFragmentView.findViewById(R.id.cb_start_service);
+		cb_msg = (CheckBox) mFragmentView.findViewById(R.id.cb_receive_msg);
+		
+		et_buyPrice.setText(SinaZbyPreferWR.Preference(getActivity()).getBuyPirce());
+		et_salePrice.setText(SinaZbyPreferWR.Preference(getActivity()).getSalePrice());
+		et_update.setText(SinaZbyPreferWR.Preference(getActivity()).getUpdate());
+		cb_service.setChecked(SinaZbyPreferWR.Preference(getActivity()).getServiceStatus());
+		cb_msg.setChecked(SinaZbyPreferWR.Preference(getActivity()).getMsgStatus());
+		
 	}
 
 	@Override

@@ -9,67 +9,67 @@ import android.content.Context;
 
 public class GrabInfo {
 
-	private String grabUrl;
-	private GrabHandler grabHandler;
-	private int grabTimeout;
-	private String grabName;
-	private Context grabContext;
-	private AsyncHttpClient client;
+	private String mGrabUrl;
+	private GrabHandler mGrabHandler;
+	private int mGrabTimeout;
+	private String mGrabName;
+	private Context mGrabContext;
+	private AsyncHttpClient mClient;
 
 	public GrabInfo(String grabName, String grabUrl, GrabHandler grabHandler,
 			int grabTimeout) {
-		this.grabUrl = grabUrl;
-		this.grabHandler = grabHandler;
-		this.grabTimeout = grabTimeout;
-		this.grabName = grabName;
-		client = new AsyncHttpClient();
+		mGrabUrl = grabUrl;
+		mGrabHandler = grabHandler;
+		mGrabTimeout = grabTimeout;
+		mGrabName = grabName;
+		mClient = new AsyncHttpClient();
 	}
 
 	public String getGrabUrl() {
-		return grabUrl;
+		return mGrabUrl;
 	}
 
 	public void setGrabUrl(String grabUrl) {
-		this.grabUrl = grabUrl;
+		mGrabUrl = grabUrl;
 	}
 
 	public GrabHandler getGrabHandler() {
-		return grabHandler;
+		return mGrabHandler;
 	}
 
 	public void setGrabHandler(GrabHandler grabHandler) {
-		this.grabHandler = grabHandler;
+		mGrabHandler = grabHandler;
 	}
 
 	public int getGrabTimeout() {
-		return grabTimeout;
+		return mGrabTimeout;
 	}
 
 	public void setGrabTimeout(int grabTimeout) {
-		this.grabTimeout = grabTimeout;
+		mGrabTimeout = grabTimeout;
 	}
 
 	public String getGrabName() {
-		return grabName;
+		return mGrabName;
 	}
 
 	public void setGrabName(String grabName) {
-		this.grabName = grabName;
+		mGrabName = grabName;
 	}
 
 	public void doGrab(final Context grabContext) throws GrabException{
-		this.grabContext = grabContext;
-		client.get(grabUrl, new TextHttpResponseHandler(){
+		mGrabContext = grabContext;
+		mClient.get(mGrabUrl, new TextHttpResponseHandler(){
 
 			@Override
 			public void onFailure(int arg0, Header[] arg1, String arg2,
 					Throwable arg3) {
-				grabHandler.doWithData("", grabContext);
+				mGrabHandler.doWithData("", grabContext);
 			}
 
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, String content) {
-				grabHandler.doWithData(content, grabContext);
+				mGrabHandler.doWithData(content, grabContext);
 			}
 			
 		});

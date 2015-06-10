@@ -24,7 +24,7 @@ public class SinaZbyPreferWR extends PreferWR {
 	public static SinaZbyPreferWR Preference(Context context){
 		
 			instance = new SinaZbyPreferWR(context, "SettingXML");
-			instance.autoCommit = true;
+			instance.mAutoCommit = true;
 		
 		return instance;
 	}
@@ -34,7 +34,7 @@ public class SinaZbyPreferWR extends PreferWR {
 		
 		if(null == instance){
 			instance = new SinaZbyPreferWR(context, "SettingXML");
-			instance.autoCommit = true;
+			instance.mAutoCommit = true;
 		}
 		
 		return instance;

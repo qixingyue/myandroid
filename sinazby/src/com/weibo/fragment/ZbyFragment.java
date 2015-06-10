@@ -21,27 +21,27 @@ import com.weibo.sinazby.service.handlers.ZbyGrabHandler;
 
 public class ZbyFragment extends Fragment implements Runnable {
 
-	private TextView timerView;
-	private Handler handler = new Handler(Looper.getMainLooper());
-	private int start = 30;
-	private ZbyModel showModel;
-	private IntentFilter fliter = new IntentFilter();
-	private TextView innerPrice, outPrice, maxPrice, minPrice, direction,preBuyTextview,preSaleTextview;
-	private String preBuy,preSale;
+	private TextView mTimerView;
+	private Handler mHandler = new Handler(Looper.getMainLooper());
+	private int mStart = 30;
+	private ZbyModel mShowModel;
+	private IntentFilter mFliter = new IntentFilter();
+	private TextView mTextViewInnerPrice, mTextViewOutPrice, mTextViewMaxPrice, mTextViewMinPrice, mTextViewDirection,mTextViewPreBuy,mTextViewPreSale;
+	private String mPreBuy,mPreSale;
 
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String data = intent.getStringExtra("broadCastContent");
-			showModel = ZbyModel.parseFromJsonString(data);
+			mShowModel = ZbyModel.parseFromJsonString(data);
 			updateUI();
 		}
 	};
 
 	public void onCreate(Bundle savedInstanceState) {
 		
-		preBuy = SinaZbyPreferWR.Preference(getActivity()).getBuyPirce();
-		preSale = SinaZbyPreferWR.Preference(getActivity()).getSalePrice();
+		mPreBuy = SinaZbyPreferWR.Preference(getActivity()).getBuyPirce();
+		mPreSale = SinaZbyPreferWR.Preference(getActivity()).getSalePrice();
 		
 		super.onCreate(savedInstanceState);
 	}
@@ -50,16 +50,16 @@ public class ZbyFragment extends Fragment implements Runnable {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_zby, null);
-		timerView = (TextView) view.findViewById(R.id.tvTimer);
+		mTimerView = (TextView) view.findViewById(R.id.tvTimer);
 		
-		innerPrice = (TextView) view.findViewById(R.id.tv_show_buy);
-		outPrice = (TextView) view.findViewById(R.id.tv_show_sale);
-		maxPrice = (TextView) view.findViewById(R.id.tv_show_highest);
-		minPrice = (TextView) view.findViewById(R.id.tv_show_lowest);
-		direction = (TextView) view.findViewById(R.id.tv_show_direction);
+		mTextViewInnerPrice = (TextView) view.findViewById(R.id.tv_show_buy);
+		mTextViewOutPrice = (TextView) view.findViewById(R.id.tv_show_sale);
+		mTextViewMaxPrice = (TextView) view.findViewById(R.id.tv_show_highest);
+		mTextViewMinPrice = (TextView) view.findViewById(R.id.tv_show_lowest);
+		mTextViewDirection = (TextView) view.findViewById(R.id.tv_show_direction);
 		
-		preBuyTextview = (TextView) view.findViewById(R.id.tv_buy);
-		preSaleTextview = (TextView) view.findViewById(R.id.tv_sale);
+		mTextViewPreBuy = (TextView) view.findViewById(R.id.tv_buy);
+		mTextViewPreSale = (TextView) view.findViewById(R.id.tv_sale);
 		
 		initUI();
 		
@@ -67,45 +67,45 @@ public class ZbyFragment extends Fragment implements Runnable {
 	}
 
 	private void initUI() {
-		preBuyTextview.setText(getResStr(R.string.pre_buy_price, true)+ preBuy);
-		preSaleTextview.setText(getResStr(R.string.pre_sale_price, true) + preSale);
+		mTextViewPreBuy.setText(getResStr(R.string.pre_buy_price, true)+ mPreBuy);
+		mTextViewPreSale.setText(getResStr(R.string.pre_sale_price, true) + mPreSale);
 	}
 
 	public void setTimer(int currentTime) {
-		if (null != timerView) {
-			timerView.setText(currentTime + "");
+		if (null != mTimerView) {
+			mTimerView.setText(currentTime + "");
 		}
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		handler.post(this);
+		mHandler.post(this);
 
-		fliter.addAction(ZbyGrabHandler.ZBYPriceLoaded);
-		getActivity().registerReceiver(mReceiver, fliter);
+		mFliter.addAction(ZbyGrabHandler.ZBYPriceLoaded);
+		getActivity().registerReceiver(mReceiver, mFliter);
 	}
 
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		handler.removeCallbacksAndMessages(null);
+		mHandler.removeCallbacksAndMessages(null);
 		getActivity().unregisterReceiver(mReceiver);
 	}
 
 	@Override
 	public void run() {
-		start = (start + 30 - 1) % 30;
-		setTimer(start);
-		handler.postDelayed(this, 1000);
+		mStart = (mStart + 30 - 1) % 30;
+		setTimer(mStart);
+		mHandler.postDelayed(this, 1000);
 	}
 
 	public void updateUI() {
-		innerPrice.setText(getResStr(R.string.show_buy_price, true) + showModel.getInnerPrice() );
-		outPrice.setText(getResStr(R.string.show_sale_price, true) + showModel.getOutPrice() );
-		maxPrice.setText(getResStr(R.string.show_today_highest, true) + showModel.getTodayHigh());
-		minPrice.setText(getResStr(R.string.show_today_lowest, true) + showModel.getTodayLow());
-		direction.setText(getResStr(R.string.show_trend, true) + (showModel.getDirection().equals("U") ? getResStr(R.string.show_trend_up, false) : getResStr(R.string.show_trend_down, false)) );
+		mTextViewInnerPrice.setText(getResStr(R.string.show_buy_price, true) + mShowModel.getInnerPrice() );
+		mTextViewOutPrice.setText(getResStr(R.string.show_sale_price, true) + mShowModel.getOutPrice() );
+		mTextViewMaxPrice.setText(getResStr(R.string.show_today_highest, true) + mShowModel.getTodayHigh());
+		mTextViewMinPrice.setText(getResStr(R.string.show_today_lowest, true) + mShowModel.getTodayLow());
+		mTextViewDirection.setText(getResStr(R.string.show_trend, true) + (mShowModel.getDirection().equals("U") ? getResStr(R.string.show_trend_up, false) : getResStr(R.string.show_trend_down, false)) );
 	}
 	
 	private String getResStr(int resid, boolean addBackSpace){

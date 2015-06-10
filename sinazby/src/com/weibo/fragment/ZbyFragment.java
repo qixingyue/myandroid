@@ -67,8 +67,8 @@ public class ZbyFragment extends Fragment implements Runnable {
 	}
 
 	private void initUI() {
-		preBuyTextview.setText("你预约的买入价为：" + preBuy);
-		preSaleTextview.setText("你预约的卖出价：" + preSale);
+		preBuyTextview.setText(getResStr(R.string.pre_buy_price, true)+ preBuy);
+		preSaleTextview.setText(getResStr(R.string.pre_sale_price, true) + preSale);
 	}
 
 	public void setTimer(int currentTime) {
@@ -101,11 +101,18 @@ public class ZbyFragment extends Fragment implements Runnable {
 	}
 
 	public void updateUI() {
-		innerPrice.setText("买入：" + showModel.getInnerPrice() );
-		outPrice.setText("卖出：" + showModel.getOutPrice() );
-		maxPrice.setText("最高：" + showModel.getTodayHigh());
-		minPrice.setText("最低：" + showModel.getTodayLow());
-		direction.setText("趋势：" + (showModel.getDirection().equals("U") ? "上涨" : "下降") );
+		innerPrice.setText(getResStr(R.string.show_buy_price, true) + showModel.getInnerPrice() );
+		outPrice.setText(getResStr(R.string.show_sale_price, true) + showModel.getOutPrice() );
+		maxPrice.setText(getResStr(R.string.show_today_highest, true) + showModel.getTodayHigh());
+		minPrice.setText(getResStr(R.string.show_today_lowest, true) + showModel.getTodayLow());
+		direction.setText(getResStr(R.string.show_trend, true) + (showModel.getDirection().equals("U") ? getResStr(R.string.show_trend_up, false) : getResStr(R.string.show_trend_down, false)) );
 	}
-
+	
+	private String getResStr(int resid, boolean addBackSpace){
+		CharSequence message = "";
+		if(addBackSpace){
+			message = " ";
+		}
+		return getActivity().getString(resid, message);
+	}
 }

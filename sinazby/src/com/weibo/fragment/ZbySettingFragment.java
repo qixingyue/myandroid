@@ -88,11 +88,7 @@ public class ZbySettingFragment extends Fragment implements OnClickListener {
 			
 			((SinaZbyActivity) getActivity()).settingChanged();
 			
-		}
-		
+		}	
 	}
-	
-	
-	
 	
 }

@@ -4,13 +4,10 @@
     <string name="app_name">基金纸白银</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
     <string name="service_ticker_buy">可以入场买了</string>
     <string name="service_ticker_sale">你终于解套了</string>
-    
     <string name="setting_tvbuy_text">你预约买入价为:</string>
     <string name="setting_tvsale_text">你预约卖出价为:</string>
-    
     <string name="setting_hinttext_price">价格类似:3.43</string>
     <string name="setting_hinttext_update">最小为3秒</string>
     <string name="setting_tvupdate_text">更新频率:</string>
@@ -18,4 +15,16 @@
     <string name="setting_notify_msg">接收消息</string>
     <string name="setting_btn_save">保存</string>
     <string name="setting_btn_savesuccess">保存成功，服务设置下次启动生效</string>
+    <string name="iv_redline">分隔线</string>
+    
+    <string name="pre_buy_price">你预约的买入价为：</string>
+    <string name="pre_sale_price">你预约的卖出价为：</string>
+    <string name="show_buy_price">买入：</string>
+    <string name="show_sale_price">卖出：</string>
+    <string name="show_today_highest">最高：</string>
+    <string name="show_today_lowest">最低：</string>
+    <string name="show_trend">趋势：</string>
+    <string name="show_trend_up">上涨</string>
+    <string name="show_trend_down">下降</string>
+
 </resources>

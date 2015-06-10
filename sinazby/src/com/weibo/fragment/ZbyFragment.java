@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -108,7 +109,15 @@ public class ZbyFragment extends Fragment implements Runnable {
 		mTextViewOutPrice.setText(getResStr(R.string.show_sale_price, true) + mShowModel.getOutPrice() );
 		mTextViewMaxPrice.setText(getResStr(R.string.show_today_highest, true) + mShowModel.getTodayHigh());
 		mTextViewMinPrice.setText(getResStr(R.string.show_today_lowest, true) + mShowModel.getTodayLow());
-		mTextViewDirection.setText(getResStr(R.string.show_trend, true) + (mShowModel.getDirection().equals("U") ? getResStr(R.string.show_trend_up, false) : getResStr(R.string.show_trend_down, false)) );
+		
+		if(mShowModel.getDirection().equals("U")){
+			mTextViewDirection.setTextColor(Color.RED);
+			mTextViewDirection.setText(getResStr(R.string.show_trend, true) + getResStr(R.string.show_trend_up, false));
+		}else{
+			mTextViewDirection.setTextColor(Color.GREEN);
+			mTextViewDirection.setText(getResStr(R.string.show_trend, true) + getResStr(R.string.show_trend_down, false));
+		}
+
 	}
 	
 	private String getResStr(int resid, boolean addBackSpace){

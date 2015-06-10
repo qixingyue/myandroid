@@ -23,18 +23,21 @@ public class ZbyFragment extends Fragment implements Runnable {
 
 	private TextView mTimerView;
 	private Handler mHandler = new Handler(Looper.getMainLooper());
-	private int mStart = 30;
+	private int mStart;
 	private ZbyModel mShowModel;
 	private IntentFilter mFliter = new IntentFilter();
 	private TextView mTextViewInnerPrice, mTextViewOutPrice, mTextViewMaxPrice, mTextViewMinPrice, mTextViewDirection,mTextViewPreBuy,mTextViewPreSale;
 	private String mPreBuy,mPreSale;
-
+	private int mTimeout = 30;
+	
+	
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String data = intent.getStringExtra("broadCastContent");
 			mShowModel = ZbyModel.parseFromJsonString(data);
 			updateUI();
+			mStart = 0;
 		}
 	};
 
@@ -42,7 +45,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 		
 		mPreBuy = SinaZbyPreferWR.Preference(getActivity()).getBuyPirce();
 		mPreSale = SinaZbyPreferWR.Preference(getActivity()).getSalePrice();
-		
+		mTimeout = SinaZbyPreferWR.Preference(getActivity()).getUpdate();
 		super.onCreate(savedInstanceState);
 	}
 	
@@ -95,7 +98,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 
 	@Override
 	public void run() {
-		mStart = (mStart + 30 - 1) % 30;
+		mStart = (mStart + mTimeout - 1) % mTimeout;
 		setTimer(mStart);
 		mHandler.postDelayed(this, 1000);
 	}

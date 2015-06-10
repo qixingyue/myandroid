@@ -65,7 +65,7 @@ public class SinaZbyActivity extends FragmentActivity {
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
 		
 		items.add(new SatelliteMenuItem(1, R.drawable.ic_38));
-		items.add(new SatelliteMenuItem(2, R.drawable.ic_logo));
+		items.add(new SatelliteMenuItem(2, R.drawable.ic_25));
 		
 		menu.addItems(items);
 		menu.setOnItemClickedListener(new SateliteClickedListener() {

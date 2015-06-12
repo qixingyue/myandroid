@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
@@ -121,7 +122,10 @@ public class ZbyFragment extends Fragment implements Runnable {
 			mTextViewDirection.setText(getResStr(R.string.show_trend, true) + getResStr(R.string.show_trend_down, false));
 		}
 		
-		mFragmentView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.flash));
+		Animation flashAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.flash);
+		flashAnimation.setRepeatCount(2);
+		flashAnimation.setRepeatMode(Animation.REVERSE);
+		mFragmentView.startAnimation(flashAnimation);
 
 	}
 	

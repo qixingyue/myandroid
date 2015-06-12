@@ -3,6 +3,7 @@ package com.weibo.sinazby;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.weibo.config.Const;
 import com.weibo.fragment.ZbyFragment;
 import com.weibo.fragment.ZbySettingFragment;
 import com.weibo.sinazby.service.Starter;
@@ -31,7 +32,6 @@ public class SinaZbyActivity extends FragmentActivity {
 		setContentView(R.layout.activity_sina_zby);
 		showZbyFragment();
 		initMenu();
-
 	}
 	
 	private void showZbyFragment(){

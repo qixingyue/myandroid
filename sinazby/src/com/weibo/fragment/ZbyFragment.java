@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.weibo.libs.SinaZbyPreferWR;
@@ -30,6 +31,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 	private TextView mTextViewInnerPrice, mTextViewOutPrice, mTextViewMaxPrice, mTextViewMinPrice, mTextViewDirection,mTextViewPreBuy,mTextViewPreSale;
 	private String mPreBuy,mPreSale;
 	private int mTimeout = 30;
+	private View mFragmentView;
 	
 	
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -53,21 +55,21 @@ public class ZbyFragment extends Fragment implements Runnable {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_zby, null);
-		mTimerView = (TextView) view.findViewById(R.id.tvTimer);
+		mFragmentView = inflater.inflate(R.layout.fragment_zby, null);
+		mTimerView = (TextView) mFragmentView.findViewById(R.id.tvTimer);
 		
-		mTextViewInnerPrice = (TextView) view.findViewById(R.id.tv_show_buy);
-		mTextViewOutPrice = (TextView) view.findViewById(R.id.tv_show_sale);
-		mTextViewMaxPrice = (TextView) view.findViewById(R.id.tv_show_highest);
-		mTextViewMinPrice = (TextView) view.findViewById(R.id.tv_show_lowest);
-		mTextViewDirection = (TextView) view.findViewById(R.id.tv_show_direction);
+		mTextViewInnerPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_buy);
+		mTextViewOutPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_sale);
+		mTextViewMaxPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_highest);
+		mTextViewMinPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_lowest);
+		mTextViewDirection = (TextView) mFragmentView.findViewById(R.id.tv_show_direction);
 		
-		mTextViewPreBuy = (TextView) view.findViewById(R.id.tv_buy);
-		mTextViewPreSale = (TextView) view.findViewById(R.id.tv_sale);
+		mTextViewPreBuy = (TextView) mFragmentView.findViewById(R.id.tv_buy);
+		mTextViewPreSale = (TextView) mFragmentView.findViewById(R.id.tv_sale);
 		
 		initUI();
 		
-		return view;
+		return mFragmentView;
 	}
 
 	private void initUI() {
@@ -105,6 +107,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 	}
 
 	public void updateUI() {
+		
 		mTextViewInnerPrice.setText(getResStr(R.string.show_buy_price, true) + mShowModel.getInnerPrice() );
 		mTextViewOutPrice.setText(getResStr(R.string.show_sale_price, true) + mShowModel.getOutPrice() );
 		mTextViewMaxPrice.setText(getResStr(R.string.show_today_highest, true) + mShowModel.getTodayHigh());
@@ -117,6 +120,8 @@ public class ZbyFragment extends Fragment implements Runnable {
 			mTextViewDirection.setTextColor(Color.GREEN);
 			mTextViewDirection.setText(getResStr(R.string.show_trend, true) + getResStr(R.string.show_trend_down, false));
 		}
+		
+		mFragmentView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.flash));
 
 	}
 	

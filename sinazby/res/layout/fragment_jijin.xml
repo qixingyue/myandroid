@@ -1,0 +1,96 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="#CCCCCC"
+                android:textSize="120sp" />
+
+            <com.weibo.libs.RadarView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_show_buy"
+                    style="@style/GreenText"
+                    android:text="买入:0.000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_show_sale"
+                    style="@style/RedText"
+                    android:text="卖出:0.000" />
+
+                <TextView
+                    android:id="@+id/tv_show_highest"
+                    style="@style/RedText"
+                    android:layout_marginTop="7dp"
+                    android:text="最高:0.000" />
+
+                
+                <TextView
+                    android:id="@+id/tv_show_lowest"
+                    style="@style/GreenText"
+                    android:text="最低:0.000" />
+
+                <TextView
+                    android:id="@+id/tv_show_direction"
+                    style="@style/BaseText"
+                    android:layout_marginTop="7dp"
+                    android:text="趋势:上涨" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/red_line"
+            android:layerType="software"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_buy"
+                style="@style/RedText"
+                android:text="yyy" />
+
+            <TextView
+                android:id="@+id/tv_sale"
+                style="@style/GreenText"
+                android:layout_marginTop="5dp"
+                android:text="xxxx" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

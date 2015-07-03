@@ -20,8 +20,8 @@
         sat:closeOnClick="true"
         sat:expandDuration="500"
         sat:mainImage="@drawable/ic_38"
-        sat:satelliteDistance="60dp"
-        sat:itemDegree="45" 
+        sat:satelliteDistance="80dp"
+        sat:itemDegree="35" 
         sat:startDegree="10" />
     
 </FrameLayout>

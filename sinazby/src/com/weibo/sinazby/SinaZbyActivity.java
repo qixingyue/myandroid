@@ -3,26 +3,24 @@ package com.weibo.sinazby;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.weibo.config.Const;
-import com.weibo.fragment.ZbyFragment;
-import com.weibo.fragment.ZbySettingFragment;
-import com.weibo.sinazby.service.Starter;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
-import android.view.ext.*;
+import android.view.ext.SatelliteMenu;
 import android.view.ext.SatelliteMenu.SateliteClickedListener;
+import android.view.ext.SatelliteMenuItem;
+
+import com.weibo.fragment.JiJinFragment;
+import com.weibo.fragment.ZbyFragment;
+import com.weibo.fragment.ZbySettingFragment;
+import com.weibo.sinazby.service.Starter;
 
 
 public class SinaZbyActivity extends FragmentActivity {
 
-	private Fragment mZbyFragment,mSettingFragment;
+	private Fragment mZbyFragment,mSettingFragment, mJiJinFragment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +37,13 @@ public class SinaZbyActivity extends FragmentActivity {
 			mZbyFragment = new ZbyFragment();
 		} 
 		showFragment(mZbyFragment);
+	}
+	
+	private void showJiJinFragment(){
+		if (null == mJiJinFragment) {
+			mJiJinFragment = new JiJinFragment();
+		} 
+		showFragment(mJiJinFragment);
 	}
 	
 	private void showSettingFragment(){
@@ -66,15 +71,22 @@ public class SinaZbyActivity extends FragmentActivity {
 		
 		items.add(new SatelliteMenuItem(1, R.drawable.ic_38));
 		items.add(new SatelliteMenuItem(2, R.drawable.ic_25));
+		items.add(new SatelliteMenuItem(3, R.drawable.ic_26));
 		
 		menu.addItems(items);
 		menu.setOnItemClickedListener(new SateliteClickedListener() {
 
 			public void eventOccured(int id) {
-				if(id == 1) {
+				switch(id){
+				case 1:
 					showSettingFragment();
-				} else {
+					break;
+				case 2:
 					showZbyFragment();
+					break;
+				case 3:
+					showJiJinFragment();
+					break;
 				}
 			}
 		});

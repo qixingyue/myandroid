@@ -37,36 +37,26 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/tv_show_buy"
+                    android:id="@+id/tv_now_time"
                     style="@style/GreenText"
-                    android:text="买入:0.000"
+                    android:text="更新时间:0.000"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tv_show_sale"
+                    android:id="@+id/tv_now_price"
                     style="@style/RedText"
-                    android:text="卖出:0.000" />
+                    android:text="当前均价:0.000" />
 
                 <TextView
-                    android:id="@+id/tv_show_highest"
+                    android:id="@+id/tv_last_price"
                     style="@style/RedText"
                     android:layout_marginTop="7dp"
-                    android:text="最高:0.000" />
+                    android:text="昨日均价:0.000" />
 
-                
-                <TextView
-                    android:id="@+id/tv_show_lowest"
-                    style="@style/GreenText"
-                    android:text="最低:0.000" />
-
-                <TextView
-                    android:id="@+id/tv_show_direction"
-                    style="@style/BaseText"
-                    android:layout_marginTop="7dp"
-                    android:text="趋势:上涨" />
             </LinearLayout>
         </FrameLayout>
 
+        <!--
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="4dp"
@@ -74,6 +64,7 @@
             android:layerType="software"
             android:visibility="visible" />
 
+         
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -91,6 +82,7 @@
                 android:layout_marginTop="5dp"
                 android:text="xxxx" />
         </LinearLayout>
+         -->
     </LinearLayout>
 
 </ScrollView>

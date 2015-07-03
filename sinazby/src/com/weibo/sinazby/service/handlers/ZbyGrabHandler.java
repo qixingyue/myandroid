@@ -1,6 +1,5 @@
 package com.weibo.sinazby.service.handlers;
 
-import com.weibo.config.Const;
 import com.weibo.model.ZbyModel;
 import com.weibo.sinazby.R;
 import com.weibo.sinazby.SinaZbyActivity;
@@ -11,7 +10,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 public class ZbyGrabHandler extends BroadCastHandler {
 	

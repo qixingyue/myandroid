@@ -18,8 +18,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.weibo.libs.SinaZbyPreferWR;
+import com.weibo.model.JijinModel;
 import com.weibo.model.ZbyModel;
 import com.weibo.sinazby.R;
+import com.weibo.sinazby.service.handlers.JijinGrabHandler;
 import com.weibo.sinazby.service.handlers.ZbyGrabHandler;
 
 public class JiJinFragment extends Fragment implements Runnable {
@@ -27,9 +29,9 @@ public class JiJinFragment extends Fragment implements Runnable {
 	private TextView mTimerView;
 	private Handler mHandler = new Handler(Looper.getMainLooper());
 	private int mStart;
-	private ZbyModel mShowModel;
+	private JijinModel mShowModel;
 	private IntentFilter mFliter = new IntentFilter();
-	private TextView mTextViewInnerPrice, mTextViewOutPrice, mTextViewMaxPrice, mTextViewMinPrice, mTextViewDirection,mTextViewPreBuy,mTextViewPreSale;
+	private TextView mTextViewNowTime,mTextViewCurrentPrice,mTextViewLastPrice;
 	private String mPreBuy,mPreSale;
 	private int mTimeout = 30;
 	private View mFragmentView;
@@ -39,16 +41,13 @@ public class JiJinFragment extends Fragment implements Runnable {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String data = intent.getStringExtra("broadCastContent");
-			mShowModel = ZbyModel.parseFromJsonString(data);
+			mShowModel = JijinModel.parseFromJsonString(data);
 			updateUI();
 			mStart = 0;
 		}
 	};
 
 	public void onCreate(Bundle savedInstanceState) {
-		
-		mPreBuy = SinaZbyPreferWR.Preference(getActivity()).getBuyPirce();
-		mPreSale = SinaZbyPreferWR.Preference(getActivity()).getSalePrice();
 		mTimeout = SinaZbyPreferWR.Preference(getActivity()).getUpdate();
 		super.onCreate(savedInstanceState);
 	}
@@ -59,14 +58,9 @@ public class JiJinFragment extends Fragment implements Runnable {
 		mFragmentView = inflater.inflate(R.layout.fragment_jijin, null);
 		mTimerView = (TextView) mFragmentView.findViewById(R.id.tvTimer);
 		
-		mTextViewInnerPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_buy);
-		mTextViewOutPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_sale);
-		mTextViewMaxPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_highest);
-		mTextViewMinPrice = (TextView) mFragmentView.findViewById(R.id.tv_show_lowest);
-		mTextViewDirection = (TextView) mFragmentView.findViewById(R.id.tv_show_direction);
-		
-		mTextViewPreBuy = (TextView) mFragmentView.findViewById(R.id.tv_buy);
-		mTextViewPreSale = (TextView) mFragmentView.findViewById(R.id.tv_sale);
+		mTextViewNowTime = (TextView) mFragmentView.findViewById(R.id.tv_now_time);
+		mTextViewCurrentPrice = (TextView) mFragmentView.findViewById(R.id.tv_now_price);
+		mTextViewLastPrice = (TextView) mFragmentView.findViewById(R.id.tv_last_price);
 		
 		initUI();
 		
@@ -74,8 +68,7 @@ public class JiJinFragment extends Fragment implements Runnable {
 	}
 
 	private void initUI() {
-		mTextViewPreBuy.setText(getResStr(R.string.pre_buy_price, true)+ mPreBuy);
-		mTextViewPreSale.setText(getResStr(R.string.pre_sale_price, true) + mPreSale);
+
 	}
 
 	public void setTimer(int currentTime) {
@@ -89,7 +82,7 @@ public class JiJinFragment extends Fragment implements Runnable {
 		super.onAttach(activity);
 		mHandler.post(this);
 
-		mFliter.addAction(ZbyGrabHandler.ZBYPriceLoaded);
+		mFliter.addAction(JijinGrabHandler.JIJINPRICELOADED);
 		getActivity().registerReceiver(mReceiver, mFliter);
 	}
 
@@ -108,19 +101,9 @@ public class JiJinFragment extends Fragment implements Runnable {
 	}
 
 	public void updateUI() {
-		
-		mTextViewInnerPrice.setText(getResStr(R.string.show_buy_price, true) + mShowModel.getInnerPrice() );
-		mTextViewOutPrice.setText(getResStr(R.string.show_sale_price, true) + mShowModel.getOutPrice() );
-		mTextViewMaxPrice.setText(getResStr(R.string.show_today_highest, true) + mShowModel.getTodayHigh());
-		mTextViewMinPrice.setText(getResStr(R.string.show_today_lowest, true) + mShowModel.getTodayLow());
-		
-		if(mShowModel.getDirection().equals("U")){
-			mTextViewDirection.setTextColor(Color.RED);
-			mTextViewDirection.setText(getResStr(R.string.show_trend, true) + getResStr(R.string.show_trend_up, false));
-		}else{
-			mTextViewDirection.setTextColor(Color.GREEN);
-			mTextViewDirection.setText(getResStr(R.string.show_trend, true) + getResStr(R.string.show_trend_down, false));
-		}
+		mTextViewNowTime.setText(mShowModel.getT());
+		mTextViewCurrentPrice.setText(mShowModel.getN());
+		mTextViewLastPrice.setText(mShowModel.getL());
 		
 		Animation flashAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.flash);
 		flashAnimation.setRepeatCount(2);
@@ -129,11 +112,5 @@ public class JiJinFragment extends Fragment implements Runnable {
 
 	}
 	
-	private String getResStr(int resid, boolean addBackSpace){
-		CharSequence message = "";
-		if(addBackSpace){
-			message = " ";
-		}
-		return getActivity().getString(resid, message);
-	}
+	
 }

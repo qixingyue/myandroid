@@ -12,10 +12,12 @@ import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.weibo.libs.SinaZbyPreferWR;
 import com.weibo.model.ZbyModel;
@@ -33,6 +35,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 	private String mPreBuy,mPreSale;
 	private int mTimeout = 30;
 	private View mFragmentView;
+	private TextView mTextViewDailyDo;
 	
 	
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -68,6 +71,8 @@ public class ZbyFragment extends Fragment implements Runnable {
 		mTextViewPreBuy = (TextView) mFragmentView.findViewById(R.id.tv_buy);
 		mTextViewPreSale = (TextView) mFragmentView.findViewById(R.id.tv_sale);
 		
+		mTextViewDailyDo = (TextView) mFragmentView.findViewById(R.id.tv_daily_do);
+		
 		initUI();
 		
 		return mFragmentView;
@@ -76,6 +81,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 	private void initUI() {
 		mTextViewPreBuy.setText(getResStr(R.string.pre_buy_price, true)+ mPreBuy);
 		mTextViewPreSale.setText(getResStr(R.string.pre_sale_price, true) + mPreSale);
+		mTextViewDailyDo.setOnClickListener(new UpdateDailyInfo());
 	}
 
 	public void setTimer(int currentTime) {
@@ -123,7 +129,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 		}
 		
 		Animation flashAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.flash);
-		flashAnimation.setRepeatCount(2);
+		flashAnimation.setRepeatCount(5);
 		flashAnimation.setRepeatMode(Animation.REVERSE);
 		mFragmentView.startAnimation(flashAnimation);
 
@@ -135,5 +141,14 @@ public class ZbyFragment extends Fragment implements Runnable {
 			message = " ";
 		}
 		return getActivity().getString(resid, message);
+	}
+	
+	private class UpdateDailyInfo implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			
+		}
+		
 	}
 }

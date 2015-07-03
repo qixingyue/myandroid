@@ -11,6 +11,7 @@ import android.graphics.SweepGradient;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
 public class RadarView extends FrameLayout implements Runnable {
@@ -124,5 +125,15 @@ public class RadarView extends FrameLayout implements Runnable {
 		matrix.postRotate(start, mViewSize / 2, mViewSize / 2);
 		invalidate();
 		handler.postDelayed(this, 1000 / 60);
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		
+		switch(event.getAction()) {
+			
+		}
+		
+		return super.onTouchEvent(event);
 	}
 }

@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,10 +18,8 @@ import android.widget.TextView;
 
 import com.weibo.libs.SinaZbyPreferWR;
 import com.weibo.model.JijinModel;
-import com.weibo.model.ZbyModel;
 import com.weibo.sinazby.R;
 import com.weibo.sinazby.service.handlers.JijinGrabHandler;
-import com.weibo.sinazby.service.handlers.ZbyGrabHandler;
 
 public class JiJinFragment extends Fragment implements Runnable {
 
@@ -101,15 +98,21 @@ public class JiJinFragment extends Fragment implements Runnable {
 	}
 
 	public void updateUI() {
-		mTextViewNowTime.setText(mShowModel.getT());
-		mTextViewCurrentPrice.setText(mShowModel.getN());
-		mTextViewLastPrice.setText(mShowModel.getL());
+		
+		mTextViewNowTime.setText(getResStr(R.string.jijin_show_time) + mShowModel.getT());
+		mTextViewCurrentPrice.setText(getResStr(R.string.jijin_show_curprice) + mShowModel.getN());
+		mTextViewLastPrice.setText(getResStr(R.string.jijin_show_yesprice) + mShowModel.getL());
 		
 		Animation flashAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.flash);
 		flashAnimation.setRepeatCount(2);
 		flashAnimation.setRepeatMode(Animation.REVERSE);
 		mFragmentView.startAnimation(flashAnimation);
 
+	}
+	
+	private String getResStr(int resid){
+		CharSequence message = " ";
+		return getActivity().getString(resid, message);
 	}
 	
 	

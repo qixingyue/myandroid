@@ -16,7 +16,6 @@
     <string name="setting_btn_save">保存</string>
     <string name="setting_btn_savesuccess">保存成功，服务设置下次启动生效</string>
     <string name="iv_redline">分隔线</string>
-    
     <string name="pre_buy_price">你预约的买入价为：</string>
     <string name="pre_sale_price">你预约的卖出价为：</string>
     <string name="show_buy_price">买入：</string>
@@ -26,5 +25,8 @@
     <string name="show_trend">趋势：</string>
     <string name="show_trend_up">上涨</string>
     <string name="show_trend_down">下降</string>
+    <string name="jijin_show_time">更新时间：</string>
+    <string name="jijin_show_curprice">当前均价：</string>
+    <string name="jijin_show_yesprice">昨日均价：</string>
 
 </resources>

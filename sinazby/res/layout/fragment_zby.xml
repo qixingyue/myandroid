@@ -64,12 +64,13 @@
                     style="@style/BaseText"
                     android:layout_marginTop="7dp"
                     android:text="趋势:上涨" />
-                
+                <!-- 
                  <TextView
                     android:id="@+id/tv_daily_do"
                     style="@style/BaseText"
                     android:layout_marginTop="7dp"
                     android:text="日投资建议" />
+                     -->
                  
             </LinearLayout>
         </FrameLayout>

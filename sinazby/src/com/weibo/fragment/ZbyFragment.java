@@ -35,7 +35,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 	private String mPreBuy,mPreSale;
 	private int mTimeout = 30;
 	private View mFragmentView;
-	private TextView mTextViewDailyDo;
+//	private TextView mTextViewDailyDo;
 	
 	
 	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -71,7 +71,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 		mTextViewPreBuy = (TextView) mFragmentView.findViewById(R.id.tv_buy);
 		mTextViewPreSale = (TextView) mFragmentView.findViewById(R.id.tv_sale);
 		
-		mTextViewDailyDo = (TextView) mFragmentView.findViewById(R.id.tv_daily_do);
+//		mTextViewDailyDo = (TextView) mFragmentView.findViewById(R.id.tv_daily_do);
 		
 		initUI();
 		
@@ -81,7 +81,7 @@ public class ZbyFragment extends Fragment implements Runnable {
 	private void initUI() {
 		mTextViewPreBuy.setText(getResStr(R.string.pre_buy_price, true)+ mPreBuy);
 		mTextViewPreSale.setText(getResStr(R.string.pre_sale_price, true) + mPreSale);
-		mTextViewDailyDo.setOnClickListener(new UpdateDailyInfo());
+//		mTextViewDailyDo.setOnClickListener(new UpdateDailyInfo());
 	}
 
 	public void setTimer(int currentTime) {
